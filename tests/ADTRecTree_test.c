@@ -16,7 +16,7 @@ void test_create(void) {
 	rectree_destroy(tree);
 }
 
-/*void test_size(void) {
+void test_size(void) {
 	RecTree tree_empty = rectree_create(NULL, NULL, NULL);
 	TEST_ASSERT(!rectree_size(tree_empty));
 	rectree_destroy(tree_empty);
@@ -34,14 +34,14 @@ void test_create(void) {
 	rectree_destroy(tree);
 	rectree_destroy(tree1);
 	rectree_destroy(tree2);
-	
-}*/
+	free(value);
+}
 
 void test_value(void) {
 	Pointer value = create_int(100);
 	RecTree tree = rectree_create(value, NULL, NULL);
 	TEST_ASSERT(*(int*)rectree_value(tree) == 100);
-	free(tree);
+	rectree_destroy(tree);
 	free(value);
 }
 
@@ -53,9 +53,10 @@ void test_right_and_left(void) {
 	TEST_ASSERT(rectree_left(tree) == tree_left);
 	TEST_ASSERT(rectree_right(tree) == tree_right);
 
-	free(tree);
-	free(tree_left);
-	free(tree_right);
+	rectree_destroy(tree);
+	rectree_destroy(tree_left);
+	rectree_destroy(tree_right);
+	
 }	
 
 
@@ -70,7 +71,7 @@ void test_right_and_left(void) {
 // Λίστα με όλα τα tests προς εκτέλεση
 TEST_LIST = {
 	{ "rectree_create", test_create },
-	//{ "rectree_size", test_size },
+	{ "rectree_size", test_size },
 	{ "rectree_value", test_value},
 	{ "rectree_left_and_right", test_right_and_left},
 	{ NULL, NULL } // τερματίζουμε τη λίστα με NULL

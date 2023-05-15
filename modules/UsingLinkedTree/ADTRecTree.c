@@ -28,12 +28,10 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	if (value != NULL)
 	tree->size = 1;
 	if (left != NULL) {
-	tree->left = malloc (sizeof (*tree->left));
 	tree->left = left;
 	tree->size++;
 	}
 	if (right != NULL) {
-	tree->right = malloc (sizeof (*tree->right));
 	tree->right = right;
 	tree->size++;
 	}
