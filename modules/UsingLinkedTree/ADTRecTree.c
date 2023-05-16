@@ -29,11 +29,11 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	tree->size = 1;
 	if (left != NULL) {
 	tree->left = left;
-	tree->size++;
+	tree->size += left->size;
 	}
 	if (right != NULL) {
 	tree->right = right;
-	tree->size++;
+	tree->size += right->size;
 	}
 	return tree;
 }
