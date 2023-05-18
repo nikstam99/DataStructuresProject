@@ -23,48 +23,47 @@ int* create_int(int value); /* {
 }*/
 
 //  Ένα δέντρο είναι pointer σε αυτό το struct
-struct rec_tree {
-	Pointer value;
-	RecTree left;
-	RecTree right; 
-	int size;
-};
+
 
 RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
+	Pointer tree = count;
 	if (!count) {
 		map_val = map_create(compare_ints, NULL, NULL);
 		map_Size = map_create(compare_ints, NULL, NULL);
 		map_left = map_create(compare_ints, NULL, NULL);
 		map_right = map_create(compare_ints, NULL, NULL);
 	}
-	int size = 0;
+	int size_right = 0;
+	int size_left = 0;
+	int s = 0;
 	if (value != NULL) {
 		count++;
-		map_insert(map_val, count, value);
-		size++;
+		tree++;
+		map_insert(map_val, tree, value);
+		s = 1;
 	}
+	else map_insert(map_val, (Pointer)0, REC_TREE_EMPTY);
 	
 	
 	if (left != NULL) {
-		map_insert(map_left, count, left);
-		size += rectree_size(left);
+		map_insert(map_left, tree, left);
+		size_left = map_find(map_Size, left) - (Pointer)0;
 	}
 
 	if (right != NULL) {
-		map_insert(map_right, count, right);
-		size += rectree_size(right);
+		map_insert(map_right, tree, right);
+		size_right = map_find(map_Size, left) - (Pointer)0;
 	}
-
-	Pointer S = create_int(size);
-	map_insert(map_Size, count, S);
-	RecTree tree = count;
+	s = s + size_right + size_left;
+	Pointer size = s + (Pointer)0;
+	map_insert(map_Size, tree, size);
 	return tree;
 }
 
 // Επιστρέφει τον αριθμό στοιχείων που περιέχει το δέντρο.
 int rectree_size(RecTree tree) {
 	Pointer size = map_find(map_Size, tree);
-	return *(int*)size;
+	return size - (Pointer)0;
 }
 
 // Ελευθερώνει όλη τη μνήμη που δεσμεύει το δέντρο tree.
@@ -73,7 +72,6 @@ void rectree_destroy(RecTree tree) {
 }
 
 // Επιστρέφουν την τιμή (στη ρίζα), το αριστερό και το δεξί υποδέντρο του δέντρου tree.
-
 Pointer rectree_value(RecTree tree) {
 	return map_find(map_val, tree);
 }
