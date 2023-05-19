@@ -8,7 +8,7 @@
 #include "ADTRecTree.h"
 #include "ADTMap.h"
 
-Pointer count = 0;
+Pointer count = (Pointer)0;
 Map map_val, map_Size, map_left, map_right;
 
 
@@ -16,13 +16,6 @@ int compare_ints(Pointer a, Pointer b) {
 	return *(int*)a - *(int*)b;
 }
 
-int* create_int(int value); /* {
-	int* p = malloc(sizeof(int));
-	*p = value;
-	return p;
-}*/
-
-//  Ένα δέντρο είναι pointer σε αυτό το struct
 
 
 RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
