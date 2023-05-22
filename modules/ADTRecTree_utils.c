@@ -41,7 +41,7 @@ int compare_ints2(Pointer a, Pointer b) {
 	return *(int*)a - *(int*)b;
 }
 
-RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
+/*RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
     int parent = pos;
     RecTree tree_remove = rectree_get_subtree(tree, pos);
     Vector path = vector_create(0, NULL);
@@ -82,4 +82,4 @@ RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
     if (value % 2) sub = rectree_left(sub);
     else sub = rectree_right(sub);
     rectree_destroy(tree);
-}
+}*/
