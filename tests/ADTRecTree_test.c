@@ -25,7 +25,7 @@ void test_size(void) {
 	TEST_ASSERT(!rectree_size(tree_empty));
 	rectree_destroy(tree_empty);
 
-	/*Pointer value1 = create_int(100);
+	Pointer value1 = create_int(100);
 	RecTree tree1 = rectree_create(value1, NULL, NULL);
 	TEST_ASSERT(rectree_size(tree1) == 1);
 
@@ -43,15 +43,15 @@ void test_size(void) {
 	rectree_destroy(tree);
 	free(value1);
 	free(value2);
-	free(value3);*/
+	free(value3);
 }
 
 void test_value(void) {
-	Pointer value = create_int(100);
-	RecTree tree = rectree_create(value, NULL, NULL);
-	TEST_ASSERT(rectree_value(tree) == (Pointer)100);
+	Pointer value1 = create_int(10);
+	RecTree tree = rectree_create(value1, NULL, NULL);
+	TEST_ASSERT(rectree_value(tree) == value1);
 	rectree_destroy(tree);
-	free(value);
+	free(value1);
 }
 
 void test_right_and_left(void) {

@@ -16,22 +16,21 @@ Map map_right;
 
 
 int compare_keys(Pointer a, Pointer b) {
-	return *(int*)a - *(int*)b;
-	
+	return a - b;
 }
 
 
 
 RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	Pointer tree = count;
-	if (!count) {
+	if (count == (Pointer)0) {
 		map_val = map_create((CompareFunc)compare_keys, NULL, NULL);
 		map_Size = map_create((CompareFunc)compare_keys, NULL, NULL);
 		map_left = map_create((CompareFunc)compare_keys, NULL, NULL);
 		map_right = map_create((CompareFunc)compare_keys, NULL, NULL);
 	}
-	//int size_right = 0;
-	//int size_left = 0;
+	int size_right = 0;
+	int size_left = 0;
 	int s = 0;
 	if (value != NULL) {
 		count++;
@@ -41,17 +40,17 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	}
 	else map_insert(map_val, REC_TREE_EMPTY, REC_TREE_EMPTY);
 	
-	/*if (left != NULL) {
+	if (left != NULL) {
 		map_insert(map_left, tree, left);
 		size_left = map_find(map_Size, left) - (Pointer)0;
 		s += size_left;
-	}*/
+	}
 
-	/*if (right != NULL) {
+	if (right != NULL) {
 		map_insert(map_right, tree, right);
 		size_right = map_find(map_Size, left) - (Pointer)0;
 		s += size_right;
-	}*/
+	}
 	Pointer size = s + (Pointer)0;
 	map_insert(map_Size, tree, size);
 	return (RecTree)tree;
@@ -68,19 +67,30 @@ int rectree_size(RecTree tree) {
 
 // Ελευθερώνει όλη τη μνήμη που δεσμεύει το δέντρο tree.
 void rectree_destroy(RecTree tree) {
-	//if (tree != REC_TREE_EMPTY)
-	//map_remove(map_val, tree);
+	if (map_size(map_val)) {
+		map_remove(map_Size, tree);
+		map_remove(map_val, tree);
+		map_remove(map_left, tree);
+		map_remove(map_right, tree);
+	}
+	if (!map_size(map_val)){
+		map_destroy(map_Size);
+		map_destroy(map_val);
+		map_destroy(map_left);
+		map_destroy(map_right);
+		count = (Pointer)0;
+	}
 }
 
 // Επιστρέφουν την τιμή (στη ρίζα), το αριστερό και το δεξί υποδέντρο του δέντρου tree.
 Pointer rectree_value(RecTree tree) {
-	return map_find(map_val, REC_TREE_EMPTY);
+	return map_find(map_val, tree);
 }
 
 RecTree rectree_left(RecTree tree) {
-	return NULL;
+	return map_find(map_left, tree);
 }
 
 RecTree rectree_right(RecTree tree) {
-	return NULL;
+	return map_find(map_right, tree);
 }
