@@ -2,6 +2,7 @@
 #include "ADTVector.h"
 #include "ADTRecTree_utils.h"
 #include <stdlib.h>
+#include "ADTMap.h"
 
 RecTree rectree_get_subtree(RecTree tree, int pos) {
     if (!pos) return tree;
@@ -36,3 +37,23 @@ RecTree rectree_get_subtree(RecTree tree, int pos) {
     vector_destroy(path);
     return subtree;
 }
+
+
+/*RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
+    int parent = pos;
+    RecTree tree_remove = rectree_get_subtree(tree, pos);
+    Vector path = vector_create(0, NULL);
+    Map subtrees = map_create(NULL, NULL, NULL);
+    vector_insert_last(path, parent + (Pointer)0);
+    while (parent) {
+        if (!(parent % 2)) {
+            parent = parent/2 - 1;
+        }
+        else {
+            parent = parent/2;
+        }
+        if (parent)
+        vector_insert_last(path, parent + (Pointer)0);
+    }
+
+}*/

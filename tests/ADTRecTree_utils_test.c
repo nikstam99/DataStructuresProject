@@ -35,8 +35,6 @@ void test_rectree_get_subtree(void) {
    rectree_destroy(tree5);
    rectree_destroy(tree6);
    free(value);
-
-
 }
 
 
