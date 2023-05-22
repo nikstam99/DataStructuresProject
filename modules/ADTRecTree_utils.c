@@ -33,5 +33,6 @@ RecTree rectree_get_subtree(RecTree tree, int pos) {
     }
     if (value % 2) subtree = rectree_left(subtree);
     else subtree = rectree_right(subtree);
+    vector_destroy(path);
     return subtree;
 }
