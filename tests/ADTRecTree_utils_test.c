@@ -63,6 +63,15 @@ void test_rectree_replace_subtree(void) {
     TEST_ASSERT(rectree_get_subtree(tree6, 0) == tree6);
     TEST_ASSERT(rectree_value(rectree_get_subtree(tree6, 2)) == value2);
     TEST_ASSERT(rectree_get_subtree(tree6, 1) == tree5);
+
+    free(value);
+    free(value2);
+    free(value3);
+    free(value4);
+    rectree_destroy(tree5);
+    rectree_destroy(tree6);
+    rectree_destroy(rep);
+    rectree_destroy(rectree_get_subtree(tree6, 2));
 }
 
 // Λίστα με όλα τα tests προς εκτέλεση

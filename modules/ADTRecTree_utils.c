@@ -44,6 +44,10 @@ RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
     RecTree old_tree;
     int parent = pos;
     Pointer value;
+    help_tree = rectree_get_subtree(tree, parent);
+    if (rectree_right(help_tree)!= NULL) rectree_destroy(rectree_right(help_tree));
+    if (rectree_left(help_tree)!= NULL) rectree_destroy(rectree_left(help_tree));
+
     if (parent % 2 == 0) {
         parent = parent/2 - 1;
         help_tree = rectree_get_subtree(tree, parent);
