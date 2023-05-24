@@ -38,16 +38,16 @@ void test_rectree_get_subtree(void) {
 }
 
 void test_rectree_replace_subtree(void) {
-    Pointer value = create_int2(1);
+    Pointer value1 = create_int2(1);
     Pointer value2 = create_int2(2);
     Pointer value3 = create_int2(3);
     Pointer value4 = create_int2(4);
 
-    RecTree tree1 = rectree_create(value, NULL, NULL);
+    RecTree tree1 = rectree_create(value1, NULL, NULL);
 
-    RecTree tree2 = rectree_create(value, NULL, NULL);
+    RecTree tree2 = rectree_create(value1, NULL, NULL);
     
-    RecTree tree3 = rectree_create(value, tree1, tree2);
+    RecTree tree3 = rectree_create(value1, tree1, tree2);
     
     RecTree tree4 = rectree_create(value2, tree3, NULL);
     
@@ -55,7 +55,7 @@ void test_rectree_replace_subtree(void) {
     
     RecTree tree6 = rectree_create(value4, tree5, tree4);
 
-    RecTree rep = rectree_create(value, NULL, NULL);
+    RecTree rep = rectree_create(value1, NULL, NULL);
 
     tree6 = rectree_replace_subtree(tree6, 5, rep);
 
@@ -64,14 +64,16 @@ void test_rectree_replace_subtree(void) {
     TEST_ASSERT(rectree_value(rectree_get_subtree(tree6, 2)) == value2);
     TEST_ASSERT(rectree_get_subtree(tree6, 1) == tree5);
 
-    free(value);
+    
+    rectree_destroy(rep);
+    rectree_destroy(tree5);
+    rectree_destroy(rectree_get_subtree(tree6, 2));
+    rectree_destroy(tree6);
+    free(value1);
     free(value2);
     free(value3);
     free(value4);
-    rectree_destroy(tree5);
-    rectree_destroy(tree6);
-    rectree_destroy(rep);
-    rectree_destroy(rectree_get_subtree(tree6, 2));
+    
 }
 
 // Λίστα με όλα τα tests προς εκτέλεση

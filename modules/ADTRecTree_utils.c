@@ -40,13 +40,20 @@ RecTree rectree_get_subtree(RecTree tree, int pos) {
 
 RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
     RecTree help_tree;
+    if (!pos) {
+        help_tree = tree;
+        tree = subtree;
+        rectree_destroy(help_tree);
+        return tree;
+    }
     RecTree new_tree;
     RecTree old_tree;
     int parent = pos;
     Pointer value;
     help_tree = rectree_get_subtree(tree, parent);
-    if (rectree_right(help_tree)!= NULL) rectree_destroy(rectree_right(help_tree));
-    if (rectree_left(help_tree)!= NULL) rectree_destroy(rectree_left(help_tree));
+    if (rectree_right(help_tree)!= REC_TREE_EMPTY) rectree_destroy(rectree_right(help_tree));
+    if (rectree_left(help_tree)!= REC_TREE_EMPTY) rectree_destroy(rectree_left(help_tree));
+    
 
     if (parent % 2 == 0) {
         parent = parent/2 - 1;
@@ -63,6 +70,7 @@ RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
         rectree_destroy(rectree_left(help_tree));
     }
     rectree_destroy(help_tree);
+    
 
     while(parent) {
         if (parent % 2 == 0) {
