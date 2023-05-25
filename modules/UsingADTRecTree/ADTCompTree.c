@@ -48,14 +48,24 @@ CompTree comptree_left(CompTree tree) {
 }
 
 CompTree comptree_right(CompTree tree) {
-	return (CompTree)rectree_right((RecTree)tree);;
+	return (CompTree)rectree_right((RecTree)tree);
 }
 
 CompTree comptree_insert_last(CompTree tree, Pointer value) {
-    RecTree new_tree = rectree_create(value, NULL, NULL);
-    int size = comptree_size(tree);
-    tree = (CompTree)rectree_replace_subtree((RecTree)tree, size - 1, new_tree);
+    RecTree new_child = rectree_create(value, NULL, NULL);
+    RecTree new_parent_tree;
+    int last = comptree_size(tree) - 1;
+    int parent = last/2;
+    RecTree parent_tree = rectree_get_subtree((RecTree)tree, parent);
+    if (last % 2 == 0) {
+        new_parent_tree = rectree_create(rectree_value(parent_tree), new_child, NULL);
+    }
+    else {
+        new_parent_tree = rectree_create(rectree_value(parent_tree), rectree_left(parent_tree), new_child);
+    }
+    tree = (CompTree)rectree_replace_subtree((RecTree)tree, parent, new_parent_tree);
     return tree;
+
 }
 
 CompTree comptree_remove_last(CompTree tree) {

@@ -11,6 +11,7 @@ int* create_int3(int value) {
 }
 
 void test_insert_last(void) {
+
     RecTree tree1 = rectree_create(NULL, NULL, NULL);
     RecTree tree2 = rectree_create(NULL, NULL, NULL);
     RecTree tree3 = rectree_create(NULL, tree1, tree2);
@@ -18,13 +19,36 @@ void test_insert_last(void) {
     CompTree tree5 = comptree_create(NULL, (CompTree)tree3, (CompTree)tree4);
 
     Pointer value = create_int3(1);
-    tree5 = comptree_insert_last(tree5, value);
+    TEST_ASSERT((CompTree)rectree_get_subtree((RecTree)tree5, 5) == NULL);
 
-    TEST_ASSERT(comptree_value((CompTree)rectree_get_subtree((RecTree)tree5, 5)) == value);
+    tree5 = comptree_insert_last(tree5, value);
+    RecTree new_tree = rectree_get_subtree((RecTree)tree5, 5);
+
+    TEST_ASSERT(rectree_value(new_tree) == value);
+
+      
+   
+    rectree_destroy(tree1);
+    rectree_destroy(tree2);
+    rectree_destroy(tree3);
+    comptree_destroy(comptree_right(tree5));
+    comptree_destroy(tree5);
+    rectree_destroy(new_tree);
+    free(value);
 }
 
 void test_remove_last(void) {
+    RecTree tree1 = rectree_create(NULL, NULL, NULL);
+    RecTree tree2 = rectree_create(NULL, NULL, NULL);
+    RecTree tree3 = rectree_create(NULL, tree1, tree2);
+    RecTree tree4 = rectree_create(NULL, NULL, NULL);
+    CompTree tree5 = comptree_create(NULL, (CompTree)tree3, (CompTree)tree4);
 
+    tree5 = comptree_remove_last(tree5);
+    comptree_destroy(comptree_left(tree5));
+    comptree_destroy(tree5);
+    rectree_destroy(tree1);
+    rectree_destroy(tree4);
 }
 
 

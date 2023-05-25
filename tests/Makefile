@@ -8,15 +8,18 @@
 
 
 
-#UsingADTMap_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
+UsingADTMap_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
 
-#UsingLinkedTree_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o
+UsingLinkedTree_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o
 
-#UsingLinkedTree_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o 
+UsingLinkedTree_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o 
 
-#UsingADTMap_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o $(MODULES)/UsingDynamicArray/ADTVector.o
+UsingADTMap_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
 UsingLinkedTree_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingDynamicArray/ADTVector.o
+
+UsingADTMap_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o
+
 # Ο βασικός κορμός του Makefile
 include ../common.mk
 
