@@ -21,9 +21,6 @@ void test_create(void) {
 }
 
 void test_size(void) {
-	RecTree tree_empty = rectree_create(NULL, NULL, NULL);
-	TEST_ASSERT(!rectree_size(tree_empty));
-	rectree_destroy(tree_empty);
 
 	Pointer value1 = create_int(100);
 	RecTree tree1 = rectree_create(value1, NULL, NULL);
