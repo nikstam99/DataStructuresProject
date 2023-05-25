@@ -24,17 +24,18 @@ struct rec_tree {
 
 RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	RecTree tree = malloc (sizeof (*tree));
-	tree->size = 0;
 	tree->value = value;
 	tree->size = 1;
 	if (left != NULL) {
 	tree->left = left;
 	tree->size += left->size;
 	}
+	else tree->left = NULL;
 	if (right != NULL) {
 	tree->right = right;
 	tree->size += right->size;
 	}
+	else tree->right = NULL;
 	return tree;
 }
 
