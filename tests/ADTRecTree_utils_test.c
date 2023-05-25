@@ -65,10 +65,12 @@ void test_rectree_replace_subtree(void) {
     TEST_ASSERT(rectree_get_subtree(tree6, 1) == tree5);
 
     
-    rectree_destroy(rep);
-    rectree_destroy(tree5);
+    
     rectree_destroy(rectree_get_subtree(tree6, 2));
     rectree_destroy(tree6);
+    rectree_destroy(tree5);
+    rectree_destroy(rep);
+    
     free(value1);
     free(value2);
     free(value3);
