@@ -10,6 +10,7 @@ int* create_int3(int value) {
 	return p;
 }
 
+// Ελέγχει τη σωστή λειτουργία της comptree_insert_last
 void test_insert_last(void) {
 
     RecTree tree1 = rectree_create(NULL, NULL, NULL);
@@ -37,6 +38,7 @@ void test_insert_last(void) {
     free(value);
 }
 
+// Ελέγχει τη σωστή λειτουργία της comptree_remove_last
 void test_remove_last(void) {
     RecTree tree1 = rectree_create(NULL, NULL, NULL);
     RecTree tree2 = rectree_create(NULL, NULL, NULL);

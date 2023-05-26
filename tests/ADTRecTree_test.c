@@ -14,6 +14,8 @@ int compare_ints(Pointer a, Pointer b);
 void test_create(void) {
 	Pointer value = create_int(10);
     RecTree tree = rectree_create(value, NULL, NULL);
+
+	// Ελέγχουμε ότι δημιουργήθηκε σωστά το δέντρο
     TEST_ASSERT(tree != NULL);
 
 	rectree_destroy(tree);
@@ -24,6 +26,7 @@ void test_size(void) {
 
 	Pointer value1 = create_int(100);
 	RecTree tree1 = rectree_create(value1, NULL, NULL);
+	// Ελέγχουμε το size του δέντρου
 	TEST_ASSERT(rectree_size(tree1) == 1);
 
 	Pointer value2 = create_int(200);
@@ -32,6 +35,7 @@ void test_size(void) {
 	Pointer value3 = create_int(300);
 	RecTree tree = rectree_create(value3, tree1, tree2);
 
+	// Ελέγχουμε το size όταν έχουμε υποδέντρα 
 	TEST_ASSERT(rectree_size(tree) == 3);
 
 	
@@ -46,6 +50,8 @@ void test_size(void) {
 void test_value(void) {
 	Pointer value1 = create_int(10);
 	RecTree tree = rectree_create(value1, NULL, NULL);
+
+	// Ελέγχουμε ότι το δέντρο πήρε την τιμή value
 	TEST_ASSERT(rectree_value(tree) == value1);
 	rectree_destroy(tree);
 	free(value1);
@@ -57,6 +63,7 @@ void test_right_and_left(void) {
 	RecTree tree_right = rectree_create(value, NULL, NULL);
 	RecTree tree = rectree_create(value, tree_left, tree_right);
 	
+	// Ελέγχουμε ότι τοποθετήθηκαν σωστά τα υποδέντρα
 	TEST_ASSERT(rectree_left(tree) == tree_left);
 	TEST_ASSERT(rectree_right(tree) == tree_right);
 

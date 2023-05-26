@@ -51,24 +51,41 @@ CompTree comptree_right(CompTree tree) {
 	return (CompTree)rectree_right((RecTree)tree);
 }
 
+
+// Εισάγει στη τελευταία θέση του δέντρου tree ένα νέο υποδέντρο ώστε το tree να παραμείνει complete
 CompTree comptree_insert_last(CompTree tree, Pointer value) {
+
+    // Δημιουργούμε το νέο υποδέντρο με τιμή value
     RecTree new_child = rectree_create(value, NULL, NULL);
     RecTree new_parent_tree;
+
+    // Βρίσκουμε την τελευταία θέση 
     int last = comptree_size(tree) - 1;
+
+    // Βρίσκουμε τον πρόγονο της τελευταίας θέσης 
     int parent = last/2;
     RecTree parent_tree = rectree_get_subtree((RecTree)tree, parent);
+
+    // Τοποθετούμε το νέο υποδέντρο ως αριστερό ή δεξί παιδί του προγόνου αναλόγως την θέση του τελευταίου υποδέντρου
     if (last % 2 == 0) {
         new_parent_tree = rectree_create(rectree_value(parent_tree), new_child, NULL);
     }
     else {
         new_parent_tree = rectree_create(rectree_value(parent_tree), rectree_left(parent_tree), new_child);
     }
+
+    // Αντικαθιστούμε τον νέο πρόγονο του υποδέντρου στη θέση του παλιού με απόγονο το υποδέντρο
     tree = (CompTree)rectree_replace_subtree((RecTree)tree, parent, new_parent_tree);
+
+    // Επιστρέφουμε το δέντρο tree
     return tree;
 
 }
 
+// Αφαιρεί το τελευταίο υποδέντρο του tree
 CompTree comptree_remove_last(CompTree tree) {
+
+    // Αντικαθιστά το υποδέντρο με το κενό δέντρο και επιστρέφει το tree
     tree = (CompTree)rectree_replace_subtree((RecTree)tree, comptree_size(tree) - 1, REC_TREE_EMPTY);
     return tree;
 }

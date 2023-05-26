@@ -9,6 +9,7 @@ int* create_int2(int value) {
 	return p;
 }
 
+// Ελέγχει την σωστή λειτουργία της rectree_get_subtree
 void test_rectree_get_subtree(void) {
     Pointer value = create_int2(1);
     RecTree tree1 = rectree_create(value, NULL, NULL);
@@ -37,6 +38,7 @@ void test_rectree_get_subtree(void) {
    free(value);
 }
 
+// Ελέγχει την σωστή λειτουργία της rectree_replace_subtree
 void test_rectree_replace_subtree(void) {
     Pointer value1 = create_int2(1);
     Pointer value2 = create_int2(2);

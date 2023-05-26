@@ -17,7 +17,21 @@ __Α.Μ.__: sdi2200169
 βρίσκεται σε μη αναμενόμενα αρχεία αναφέρετε και τα αρχεία αυτά.
 
 1. O(1)
+
 2. O(logn) αφού το map είναι διατεταγμένο, οπότε η πρώτη υλοποίηση είναι πάντα πιο γρήγορη 
+
+3. Η συνάρτηση rectree_get_subtree είναι Ο(2logn) αφού κάνει προσπέλαση 2 φορές το path από την ρίζα μέχρι το pos με 
+μέγιστο ύψος h (h<=logn)
+
+Η συνάρτηση rectree_replace_subtree είναι Ο(logn + log2n) αφού χρησιμοποιεί στην αρχή μια φορά την rectree_get_subtree
+και μετά κάνει προσπέλαση το path μέχρι το pos χρησιμοποιώντας και πάλι την rectree_get_subtree σε κάθε βήμα
+
+4. Η συνάρτηση comptree_insert_last είναι Ο(2logn + log2n) αφού χρησιμοποιεί μια φορά την rectree_get_subtree και μια φορά
+την rectree_replace_subtree
+
+Η συνάρτηση comptree_remove_last είναι Ο(logn + log2n) αφού χρησιμοποιεί μόνο την rectree_replace_subtree
+
+5. 
 
 ### Documentation
 
