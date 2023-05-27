@@ -4,7 +4,7 @@
 # Υλοποιήσεις μέσω Heap: ADTPriorityQueue
 # Το Heap χρησιμοποιεί Vector, οπότε χρειαζόμαστε και μια υλοποίηση του ADTVector.
 #
-# UsingHeap_ADTPriorityQueue_test_OBJS  = ADTPriorityQueue_test.o $(MODULES)/UsingHeap/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o
+#UsingHeap_ADTPriorityQueue_test_OBJS  = ADTPriorityQueue_test.o $(MODULES)/UsingHeap/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
 UsingADTCompTree_UsingLinkedTree_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o
 

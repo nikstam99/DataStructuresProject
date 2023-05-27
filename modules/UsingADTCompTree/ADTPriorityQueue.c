@@ -10,6 +10,8 @@
 #include "ADTPriorityQueue.h"
 #include "ADTVector.h"			// Η υλοποίηση του PriorityQueue χρησιμοποιεί Vector
 #include "ADTCompTree.h"
+#include "ADTRecTree.h"
+#include "ADTRecTree_utils.h"
 
 // Ενα PriorityQueue είναι pointer σε αυτό το struct
 struct priority_queue {
@@ -40,10 +42,33 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 	// τα node_ids είναι 1-based, το node_id αποθηκεύεται στη θέση node_id - 1
 	Pointer value1 = node_value(pqueue, node_id1);
 	Pointer value2 = node_value(pqueue, node_id2);
-	CompTree tree1 = comptree_create(value1, NULL, NULL);
-	CompTree tree2 = comptree_create(value2, NULL, NULL);
-	comptree_replace_subtree(pqueue->tree, node_id1 - 1, tree2);
-	comptree_replace_subtree(pqueue->tree, node_id2 - 1, tree1);
+	CompTree help_tree = comptree_get_subtree(pqueue->tree, node_id1 - 1);
+	CompTree tree_left = comptree_left(help_tree);
+	CompTree tree_right = comptree_right(help_tree);
+	CompTree new;
+	if (comptree_value(tree_left) == value2) {
+		new = comptree_create(value1, comptree_left(tree_left), comptree_right(tree_left));
+		help_tree = comptree_create(value2, new, tree_right);
+		pqueue->tree = comptree_replace_subtree(pqueue->tree, node_id1 - 1, help_tree);
+	}
+	else if (comptree_value(tree_right) == value2) {
+		new = comptree_create(value1, comptree_left(tree_right), comptree_right(tree_right));
+		help_tree = comptree_create(value2, tree_left, new);
+		pqueue->tree = comptree_replace_subtree(pqueue->tree, node_id1 - 1, help_tree);
+	}
+	else if (node_id2 == pqueue_size(pqueue) && node_id1 == 1) {
+		help_tree = comptree_create(value1, NULL, NULL);
+		pqueue->tree = comptree_replace_subtree(pqueue->tree, node_id2 - 1, help_tree);
+		tree_left = comptree_left(pqueue->tree);
+		tree_right = comptree_right(pqueue->tree);
+		CompTree tree = comptree_create(value2, tree_left, tree_right);
+		pqueue->tree = comptree_replace_subtree(pqueue->tree, 0, tree);
+	}
+	
+
+	
+
+
 }
 
 // Αποκαθιστά την ιδιότητα του σωρού.
@@ -51,7 +76,7 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 //       τον node_id που μπορεί να είναι _μεγαλύτερος_ από τον πατέρα του.
 // Μετά: όλοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού.
 
-/*static void bubble_up(PriorityQueue pqueue, int node_id) {
+static void bubble_up(PriorityQueue pqueue, int node_id) {
 	// Αν φτάσαμε στη ρίζα, σταματάμε
 	if (node_id == 1)
 		return;
@@ -63,7 +88,7 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 		node_swap(pqueue, parent, node_id);
 		bubble_up(pqueue, parent);
 	}
-}*/
+}
 
 // Αποκαθιστά την ιδιότητα του σωρού.
 // Πριν: όλοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού, εκτός από τον
@@ -135,7 +160,9 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 }
 
 int pqueue_size(PriorityQueue pqueue) {
-	return comptree_size(pqueue->tree);
+	if (comptree_value(pqueue->tree) != NULL)
+		return comptree_size(pqueue->tree);
+	else return 0;
 }
 
 Pointer pqueue_max(PriorityQueue pqueue) {
@@ -149,7 +176,7 @@ void pqueue_insert(PriorityQueue pqueue, Pointer value) {
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τον τελευταίο, που μπορεί να είναι
 	// μεγαλύτερος από τον πατέρα του. Αρα μπορούμε να επαναφέρουμε την ιδιότητα του σωρού καλώντας
 	// τη bubble_up γα τον τελευταίο κόμβο (του οποίου το 1-based id ισούται με το νέο μέγεθος του σωρού).
-	//bubble_up(pqueue, pqueue_size(pqueue));
+	bubble_up(pqueue, pqueue_size(pqueue));
 }
 
 void pqueue_remove_max(PriorityQueue pqueue) {
@@ -180,6 +207,6 @@ void pqueue_destroy(PriorityQueue pqueue) {
 	// Αντί να κάνουμε εμείς destroy τα στοιχεία, είναι απλούστερο να
 	// προσθέσουμε τη destroy_value στο vector ώστε να κληθεί κατά το vector_destroy.
 	comptree_destroy(pqueue->tree);
-
+	bubble_up(pqueue, 1);
 	free(pqueue);
 }
