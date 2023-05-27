@@ -44,6 +44,8 @@ void test_remove_last(void) {
     CompTree tree5 = comptree_create(value, (CompTree)tree3, (CompTree)tree4);
 
     tree5 = comptree_remove_last(tree5);
+    
+    TEST_ASSERT(comptree_size(tree5) == 4);
     comptree_destroy(comptree_left(tree5));
     comptree_destroy(tree5);
     rectree_destroy(tree1);

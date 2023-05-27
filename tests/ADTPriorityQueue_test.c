@@ -6,7 +6,6 @@
 //////////////////////////////////////////////////////////////////
 
 #include "acutest.h"			// Απλή βιβλιοθήκη για unit testing
-
 #include "ADTPriorityQueue.h"
 
 // θέτει τα στοιχεία του πίνακα array  σε τυχαία σειρά
@@ -35,6 +34,7 @@ void test_create(void) {
 	pqueue_set_destroy_value(pqueue, NULL);
 
 	TEST_ASSERT(pqueue != NULL);
+	printf("%d" ,pqueue_size(pqueue));
 	TEST_ASSERT(pqueue_size(pqueue) == 0);
 
 	pqueue_destroy(pqueue);

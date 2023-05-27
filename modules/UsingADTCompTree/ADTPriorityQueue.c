@@ -124,7 +124,7 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 	// Δημιουργία του vector που αποθηκεύει τα στοιχεία.
 	// ΠΡΟΣΟΧΗ: ΔΕΝ περνάμε την destroy_value στο vector!
 	// Αν την περάσουμε θα καλείται όταν κάνουμε swap 2 στοιχεία, το οποίο δεν το επιθυμούμε.
-	pqueue->tree = comptree_create(NULL, NULL, NULL);
+	pqueue->tree = NULL;
 
 	// Αν values != NULL, αρχικοποιούμε το σωρό.
 	if (values != NULL)
@@ -144,6 +144,10 @@ Pointer pqueue_max(PriorityQueue pqueue) {
 
 void pqueue_insert(PriorityQueue pqueue, Pointer value) {
 	// Προσθέτουμε την τιμή στο τέλος το σωρού
+	if (pqueue->tree == NULL) {
+		pqueue->tree = comptree_create(value, NULL, NULL);
+	}
+	else
 	comptree_insert_last(pqueue->tree, value);
 
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τον τελευταίο, που μπορεί να είναι
