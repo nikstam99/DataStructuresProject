@@ -18,7 +18,8 @@
 
 #UsingLinkedTree_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
-#UsingADTMap_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o
+#UsingADTMap_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
+
 
 # Ο βασικός κορμός του Makefile
 include ../common.mk

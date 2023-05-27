@@ -38,7 +38,7 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	}
 	int size_right = 0;
 	int size_left = 0;
-	int s = 0;
+	int s = 1;
 	if (value != NULL) {
 		count++;
 		tree++;
@@ -63,14 +63,13 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 	// και αυξάνουμε το size του δέντρου
 	if (right != NULL) {
 		map_insert(map_right, tree, right);
-		size_right = map_find(map_Size, left) - (Pointer)0;
+		size_right = map_find(map_Size, right) - (Pointer)0;
 		s += size_right;
 	}
 	// Κάνουμε cast το size σε pointer γιατί το map δέχεται pointers 
 	// και το τοποθετούμε στο map_size
 	Pointer size = s + (Pointer)0;
 	map_insert(map_Size, tree, size);
-
 	// Επιστρέφουμε το casted σε RecTree δέντρο
 	return (RecTree)tree;
 }
@@ -79,11 +78,9 @@ RecTree rectree_create(Pointer value, RecTree left, RecTree right) {
 int rectree_size(RecTree tree) {
 
 	// Αν το δέντρο δεν είναι κενό, το βρίσκουμε στο map_size και επιστρέφουμε το size του
-	if (tree != REC_TREE_EMPTY) {
-		Pointer size = map_find(map_Size, tree);
-		return size - (Pointer)0;
-	}
-	else return 0;
+	Pointer size = map_find(map_Size, tree);
+	return size - (Pointer)0;
+	
 }
 
 // Ελευθερώνει όλη τη μνήμη που δεσμεύει το δέντρο tree.

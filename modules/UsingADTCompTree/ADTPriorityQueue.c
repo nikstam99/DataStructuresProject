@@ -31,7 +31,7 @@ struct priority_queue {
 
 static Pointer node_value(PriorityQueue pqueue, int node_id) {
 	// τα node_ids είναι 1-based, το node_id αποθηκεύεται στη θέση node_id - 1
-	return vector_get_at(pqueue->vector, node_id - 1);
+	return comptree_value(comptree_get_subtree(pqueue->tree, node_id));
 }
 
 // Ανταλλάσει τις τιμές των κόμβων node_id1 και node_id2
@@ -40,9 +40,10 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 	// τα node_ids είναι 1-based, το node_id αποθηκεύεται στη θέση node_id - 1
 	Pointer value1 = node_value(pqueue, node_id1);
 	Pointer value2 = node_value(pqueue, node_id2);
-
-	vector_set_at(pqueue->vector, node_id1 - 1, value2);
-	vector_set_at(pqueue->vector, node_id2 - 1, value1);
+	CompTree tree1 = comptree_create(value1, NULL, NULL);
+	CompTree tree2 = comptree_create(value2, NULL, NULL);
+	comptree_replace_subtree(pqueue->tree, node_id1, tree2);
+	comptree_replace_subtree(pqueue->tree, node_id2, tree1);
 }
 
 // Αποκαθιστά την ιδιότητα του σωρού.
@@ -123,7 +124,7 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 	// Δημιουργία του vector που αποθηκεύει τα στοιχεία.
 	// ΠΡΟΣΟΧΗ: ΔΕΝ περνάμε την destroy_value στο vector!
 	// Αν την περάσουμε θα καλείται όταν κάνουμε swap 2 στοιχεία, το οποίο δεν το επιθυμούμε.
-	pqueue->vector = vector_create(0, NULL);
+	pqueue->tree = comptree_create(NULL, NULL, NULL);
 
 	// Αν values != NULL, αρχικοποιούμε το σωρό.
 	if (values != NULL)
@@ -134,7 +135,7 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 }
 
 int pqueue_size(PriorityQueue pqueue) {
-	return vector_size(pqueue->vector);
+	return comptree_size(pqueue->tree);
 }
 
 Pointer pqueue_max(PriorityQueue pqueue) {
@@ -143,7 +144,7 @@ Pointer pqueue_max(PriorityQueue pqueue) {
 
 void pqueue_insert(PriorityQueue pqueue, Pointer value) {
 	// Προσθέτουμε την τιμή στο τέλος το σωρού
-	vector_insert_last(pqueue->vector, value);
+	comptree_insert_last(pqueue->tree, value);
 
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τον τελευταίο, που μπορεί να είναι
 	// μεγαλύτερος από τον πατέρα του. Αρα μπορούμε να επαναφέρουμε την ιδιότητα του σωρού καλώντας
@@ -161,7 +162,7 @@ void pqueue_remove_max(PriorityQueue pqueue) {
 
 	// Αντικαθιστούμε τον πρώτο κόμβο με τον τελευταίο και αφαιρούμε τον τελευταίο
 	node_swap(pqueue, 1, last_node);
-	vector_remove_last(pqueue->vector);
+	comptree_remove_last(pqueue->tree);
 
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τη νέα ρίζα
  	// που μπορεί να είναι μικρότερη από κάποιο παιδί της. Αρα μπορούμε να
@@ -178,8 +179,7 @@ DestroyFunc pqueue_set_destroy_value(PriorityQueue pqueue, DestroyFunc destroy_v
 void pqueue_destroy(PriorityQueue pqueue) {
 	// Αντί να κάνουμε εμείς destroy τα στοιχεία, είναι απλούστερο να
 	// προσθέσουμε τη destroy_value στο vector ώστε να κληθεί κατά το vector_destroy.
-	vector_set_destroy_value(pqueue->vector, pqueue->destroy_value);
-	vector_destroy(pqueue->vector);
+	comptree_destroy(pqueue->tree);
 
 	free(pqueue);
 }
