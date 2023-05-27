@@ -89,3 +89,13 @@ CompTree comptree_remove_last(CompTree tree) {
     tree = (CompTree)rectree_replace_subtree((RecTree)tree, comptree_size(tree) - 1, REC_TREE_EMPTY);
     return tree;
 }
+
+// Επιστρέφει το υποδέντρο του tree στη θέση pos
+CompTree comptree_get_subtree(CompTree tree, int pos) {
+    return (CompTree) rectree_get_subtree((RecTree)tree, pos);
+}
+
+//Αντικαθιστά το υποδέντρο του tree στην θέση pos με το subtree
+CompTree comptree_replace_subtree(CompTree tree, int pos, CompTree subtree) {
+    return (CompTree) rectree_replace_subtree((RecTree)tree, pos, (RecTree)subtree);
+}

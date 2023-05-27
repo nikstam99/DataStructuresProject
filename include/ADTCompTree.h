@@ -50,3 +50,8 @@ CompTree comptree_insert_last(CompTree tree, Pointer value);
 
 CompTree comptree_remove_last(CompTree tree);
 
+// Επιστρέφει το υποδέντρο του tree στη θέση pos
+CompTree comptree_get_subtree(CompTree tree, int pos);
+
+//Αντικαθιστά το υποδέντρο του tree στην θέση pos με το subtree
+CompTree comptree_replace_subtree(CompTree tree, int pos, CompTree subtree);
