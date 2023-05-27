@@ -61,6 +61,7 @@ CompTree comptree_insert_last(CompTree tree, Pointer value) {
 
     // Βρίσκουμε την τελευταία θέση 
     int last = comptree_size(tree) - 1;
+    if (comptree_size(tree) == 1 && comptree_value(tree) == NULL) return (CompTree) new_child;
 
     // Βρίσκουμε τον πρόγονο της τελευταίας θέσης 
     int parent = last/2;

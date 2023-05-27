@@ -6,7 +6,7 @@
 #
 # UsingHeap_ADTPriorityQueue_test_OBJS  = ADTPriorityQueue_test.o $(MODULES)/UsingHeap/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
-#UsingADTCompTree_UsingLinkedTree_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o
+UsingADTCompTree_UsingLinkedTree_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o
 
 #UsingADTMap_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
 

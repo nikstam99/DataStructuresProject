@@ -31,7 +31,7 @@ struct priority_queue {
 
 static Pointer node_value(PriorityQueue pqueue, int node_id) {
 	// τα node_ids είναι 1-based, το node_id αποθηκεύεται στη θέση node_id - 1
-	return comptree_value(comptree_get_subtree(pqueue->tree, node_id));
+	return comptree_value(comptree_get_subtree(pqueue->tree, node_id - 1));
 }
 
 // Ανταλλάσει τις τιμές των κόμβων node_id1 και node_id2
@@ -42,8 +42,8 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 	Pointer value2 = node_value(pqueue, node_id2);
 	CompTree tree1 = comptree_create(value1, NULL, NULL);
 	CompTree tree2 = comptree_create(value2, NULL, NULL);
-	comptree_replace_subtree(pqueue->tree, node_id1, tree2);
-	comptree_replace_subtree(pqueue->tree, node_id2, tree1);
+	comptree_replace_subtree(pqueue->tree, node_id1 - 1, tree2);
+	comptree_replace_subtree(pqueue->tree, node_id2 - 1, tree1);
 }
 
 // Αποκαθιστά την ιδιότητα του σωρού.
@@ -51,7 +51,7 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 //       τον node_id που μπορεί να είναι _μεγαλύτερος_ από τον πατέρα του.
 // Μετά: όλοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού.
 
-static void bubble_up(PriorityQueue pqueue, int node_id) {
+/*static void bubble_up(PriorityQueue pqueue, int node_id) {
 	// Αν φτάσαμε στη ρίζα, σταματάμε
 	if (node_id == 1)
 		return;
@@ -63,7 +63,7 @@ static void bubble_up(PriorityQueue pqueue, int node_id) {
 		node_swap(pqueue, parent, node_id);
 		bubble_up(pqueue, parent);
 	}
-}
+}*/
 
 // Αποκαθιστά την ιδιότητα του σωρού.
 // Πριν: όλοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού, εκτός από τον
@@ -124,7 +124,7 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 	// Δημιουργία του vector που αποθηκεύει τα στοιχεία.
 	// ΠΡΟΣΟΧΗ: ΔΕΝ περνάμε την destroy_value στο vector!
 	// Αν την περάσουμε θα καλείται όταν κάνουμε swap 2 στοιχεία, το οποίο δεν το επιθυμούμε.
-	pqueue->tree = NULL;
+	pqueue->tree = comptree_create(NULL, NULL, NULL);
 
 	// Αν values != NULL, αρχικοποιούμε το σωρό.
 	if (values != NULL)
@@ -144,16 +144,12 @@ Pointer pqueue_max(PriorityQueue pqueue) {
 
 void pqueue_insert(PriorityQueue pqueue, Pointer value) {
 	// Προσθέτουμε την τιμή στο τέλος το σωρού
-	if (pqueue->tree == NULL) {
-		pqueue->tree = comptree_create(value, NULL, NULL);
-	}
-	else
-	comptree_insert_last(pqueue->tree, value);
+	pqueue->tree = comptree_insert_last(pqueue->tree, value);
 
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τον τελευταίο, που μπορεί να είναι
 	// μεγαλύτερος από τον πατέρα του. Αρα μπορούμε να επαναφέρουμε την ιδιότητα του σωρού καλώντας
 	// τη bubble_up γα τον τελευταίο κόμβο (του οποίου το 1-based id ισούται με το νέο μέγεθος του σωρού).
-	bubble_up(pqueue, pqueue_size(pqueue));
+	//bubble_up(pqueue, pqueue_size(pqueue));
 }
 
 void pqueue_remove_max(PriorityQueue pqueue) {

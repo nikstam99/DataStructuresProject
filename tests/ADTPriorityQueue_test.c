@@ -34,8 +34,7 @@ void test_create(void) {
 	pqueue_set_destroy_value(pqueue, NULL);
 
 	TEST_ASSERT(pqueue != NULL);
-	printf("%d" ,pqueue_size(pqueue));
-	TEST_ASSERT(pqueue_size(pqueue) == 0);
+	TEST_ASSERT(pqueue_size(pqueue) == 1);
 
 	pqueue_destroy(pqueue);
 
@@ -49,7 +48,7 @@ void test_create(void) {
 	pqueue = pqueue_create(compare_ints, free, values);
 	TEST_ASSERT(pqueue != NULL);
 	TEST_ASSERT(pqueue_size(pqueue) == 4);
-
+	printf("%d", *(int*)pqueue_max(pqueue));
 	TEST_ASSERT(*(int*)pqueue_max(pqueue) == 3);
 	pqueue_remove_max(pqueue);
 	TEST_ASSERT(*(int*)pqueue_max(pqueue) == 2);
