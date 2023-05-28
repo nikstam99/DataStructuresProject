@@ -56,20 +56,24 @@ static void node_swap(PriorityQueue pqueue, int node_id1, int node_id2) {
 		help_tree = comptree_create(value2, tree_left, new);
 		pqueue->tree = comptree_replace_subtree(pqueue->tree, node_id1 - 1, help_tree);
 	}
-	else if (node_id2 == pqueue_size(pqueue) && node_id1 == 1) {
+	else if (node_id1 == 1 && node_id2 == comptree_size(pqueue->tree)) {
 		help_tree = comptree_create(value1, NULL, NULL);
 		pqueue->tree = comptree_replace_subtree(pqueue->tree, node_id2 - 1, help_tree);
 		tree_left = comptree_left(pqueue->tree);
 		tree_right = comptree_right(pqueue->tree);
 		CompTree tree = comptree_create(value2, tree_left, tree_right);
-		pqueue->tree = comptree_replace_subtree(pqueue->tree, 0, tree);
+		pqueue->tree = tree;
 	}
 	
+}
+
+		
+	
 
 	
 
 
-}
+
 
 // Αποκαθιστά την ιδιότητα του σωρού.
 // Πριν: όλοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού, εκτός από
@@ -116,16 +120,6 @@ static void bubble_down(PriorityQueue pqueue, int node_id) {
 	}
 }
 
-// Αρχικοποιεί το σωρό από τα στοιχεία του vector values.
-
-/*static void naive_heapify(PriorityQueue pqueue, Vector values) {
-	// Απλά κάνουμε insert τα στοιχεία ένα ένα.
-	// TODO: υπάρχει πιο αποδοτικός τρόπος να γίνει αυτό!
-	int size = vector_size(values);
-	for (int i = 0; i < size; i++)
-		pqueue_insert(pqueue, vector_get_at(values, i));
-}*/
-
 static void efficient_heapify(PriorityQueue pqueue, Vector values) {
 	int size = vector_size(values);
 	for (int i = 0; i < size; i++) {
@@ -153,7 +147,6 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 
 	// Αν values != NULL, αρχικοποιούμε το σωρό.
 	if (values != NULL)
-		//naive_heapify(pqueue, values);
 		efficient_heapify(pqueue, values);
 
 	return pqueue;
@@ -185,11 +178,11 @@ void pqueue_remove_max(PriorityQueue pqueue) {
 
 	// Destroy την τιμή που αφαιρείται
 	if (pqueue->destroy_value != NULL)
-		pqueue->destroy_value(pqueue_max(pqueue));
+		pqueue->destroy_value(NULL);
 
 	// Αντικαθιστούμε τον πρώτο κόμβο με τον τελευταίο και αφαιρούμε τον τελευταίο
 	node_swap(pqueue, 1, last_node);
-	comptree_remove_last(pqueue->tree);
+	pqueue->tree = comptree_remove_last(pqueue->tree);
 
  	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τη νέα ρίζα
  	// που μπορεί να είναι μικρότερη από κάποιο παιδί της. Αρα μπορούμε να
@@ -207,6 +200,5 @@ void pqueue_destroy(PriorityQueue pqueue) {
 	// Αντί να κάνουμε εμείς destroy τα στοιχεία, είναι απλούστερο να
 	// προσθέσουμε τη destroy_value στο vector ώστε να κληθεί κατά το vector_destroy.
 	comptree_destroy(pqueue->tree);
-	bubble_up(pqueue, 1);
 	free(pqueue);
 }

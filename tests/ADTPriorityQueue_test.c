@@ -47,12 +47,11 @@ void test_create(void) {
 
 	pqueue = pqueue_create(compare_ints, free, values);
 	TEST_ASSERT(pqueue != NULL);
-	printf("%d ", pqueue_size(pqueue));
+
 	TEST_ASSERT(pqueue_size(pqueue) == 4);
-	printf("%d", *(int*)pqueue_max(pqueue));
 	TEST_ASSERT(*(int*)pqueue_max(pqueue) == 3);
-	//pqueue_remove_max(pqueue);
-	//TEST_ASSERT(*(int*)pqueue_max(pqueue) == 2);
+	pqueue_remove_max(pqueue);
+	TEST_ASSERT(*(int*)pqueue_max(pqueue) == 2);
 
 	vector_destroy(values);
 	pqueue_destroy(pqueue);
