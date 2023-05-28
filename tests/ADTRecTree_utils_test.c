@@ -71,6 +71,8 @@ void test_rectree_replace_subtree(void) {
     rectree_destroy(rectree_get_subtree(tree6, 2));
     rectree_destroy(tree6);
     rectree_destroy(tree5);
+    rectree_destroy(tree1);
+    rectree_destroy(tree2);
     rectree_destroy(rep);
     
     free(value1);

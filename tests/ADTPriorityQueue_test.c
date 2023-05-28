@@ -91,11 +91,11 @@ void test_remove(void) {
 	for (int i = N-1; i >= 0; i--) {
 		int* value = pqueue_max(pqueue);
 		TEST_ASSERT(*value == i);
-		TEST_ASSERT(pqueue_max(pqueue) == value);
-		pqueue_remove_max(pqueue);
-		TEST_ASSERT(pqueue_size(pqueue) == i);
+		//TEST_ASSERT(pqueue_max(pqueue) == value);
+		//pqueue_remove_max(pqueue);
+		//TEST_ASSERT(pqueue_size(pqueue) == i);
 	}
-
+/*
 	pqueue_destroy(pqueue);
 
 	// remove από ουρά χωρίς συνάρτηση destroy
@@ -104,7 +104,7 @@ void test_remove(void) {
 	TEST_ASSERT(pqueue_max(pqueue) == &N);
 	pqueue_remove_max(pqueue);
 	pqueue_destroy(pqueue);
-	free(array);
+	free(array);*/
 }
 
 

@@ -87,10 +87,6 @@ RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
 
     // Βρίσκουμε το υποδέντρο στην θέση pos 
     help_tree = rectree_get_subtree(tree, parent);
-
-    // Καταστρέφουμε τα παιδιά του (αν έχει)
-    if (rectree_right(help_tree)!= REC_TREE_EMPTY) rectree_destroy(rectree_right(help_tree));
-    if (rectree_left(help_tree)!= REC_TREE_EMPTY) rectree_destroy(rectree_left(help_tree));
     
     // Βρίσκουμε απο το υποδέντρο που θέλουμε να αντικαταστήσουμε είναι αριστερό η δεξί
     // και δημιουργούμε τον πρόγονό του από την αρχή με υποδέντρο το subtree
