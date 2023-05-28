@@ -178,7 +178,7 @@ void pqueue_remove_max(PriorityQueue pqueue) {
 
 	// Destroy την τιμή που αφαιρείται
 	if (pqueue->destroy_value != NULL)
-		pqueue->destroy_value(NULL);
+		pqueue->destroy_value(pqueue_max(pqueue));
 
 	// Αντικαθιστούμε τον πρώτο κόμβο με τον τελευταίο και αφαιρούμε τον τελευταίο
 	node_swap(pqueue, 1, last_node);
