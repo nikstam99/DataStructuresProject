@@ -74,10 +74,8 @@ RecTree rectree_replace_subtree(RecTree tree, int pos, RecTree subtree) {
 
     // Αν το pos είναι 0 αντικαθιστά όλο το δέντρο
     if (!pos) {
-        help_tree = tree;
-        tree = subtree;
-        rectree_destroy(help_tree);
-        return tree;
+        rectree_destroy(tree);
+        return subtree;
     }
     RecTree new_tree;
     RecTree old_tree;

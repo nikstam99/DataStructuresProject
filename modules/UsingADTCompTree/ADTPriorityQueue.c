@@ -153,7 +153,7 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 }
 
 int pqueue_size(PriorityQueue pqueue) {
-	if (comptree_value(pqueue->tree) != NULL)
+	if (comptree_value(pqueue->tree) != NULL || comptree_size(pqueue->tree) > 1)
 		return comptree_size(pqueue->tree);
 	else return 0;
 }
@@ -180,14 +180,21 @@ void pqueue_remove_max(PriorityQueue pqueue) {
 	if (pqueue->destroy_value != NULL)
 		pqueue->destroy_value(pqueue_max(pqueue));
 
-	// Αντικαθιστούμε τον πρώτο κόμβο με τον τελευταίο και αφαιρούμε τον τελευταίο
-	node_swap(pqueue, 1, last_node);
-	pqueue->tree = comptree_remove_last(pqueue->tree);
+	if (pqueue_size(pqueue) > 1) {
+		// Αντικαθιστούμε τον πρώτο κόμβο με τον τελευταίο και αφαιρούμε τον τελευταίο
+		node_swap(pqueue, 1, last_node);
+	
+		pqueue->tree = comptree_remove_last(pqueue->tree);
 
- 	// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τη νέα ρίζα
- 	// που μπορεί να είναι μικρότερη από κάποιο παιδί της. Αρα μπορούμε να
- 	// επαναφέρουμε την ιδιότητα του σωρού καλώντας τη bubble_down για τη ρίζα.
-	bubble_down(pqueue, 1);
+ 		// Ολοι οι κόμβοι ικανοποιούν την ιδιότητα του σωρού εκτός από τη νέα ρίζα
+ 		// που μπορεί να είναι μικρότερη από κάποιο παιδί της. Αρα μπορούμε να
+ 		// επαναφέρουμε την ιδιότητα του σωρού καλώντας τη bubble_down για τη ρίζα.
+		bubble_down(pqueue, 1);
+	}
+	else {
+		pqueue->tree = comptree_replace_subtree(pqueue->tree, 0, NULL);
+	}
+	
 }
 
 DestroyFunc pqueue_set_destroy_value(PriorityQueue pqueue, DestroyFunc destroy_value) {

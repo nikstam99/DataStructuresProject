@@ -6,19 +6,21 @@
 #
 #UsingHeap_ADTPriorityQueue_test_OBJS  = ADTPriorityQueue_test.o $(MODULES)/UsingHeap/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
-UsingADTCompTree_UsingLinkedTree_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o
+#UsingADTCompTree_UsingLinkedTree_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o
 
-#UsingADTMap_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
+#UsingADTCompTree_UsingADTMap_ADTPriorityQueue_test_OBJS = ADTPriorityQueue_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTCompTree/ADTPriorityQueue.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
 
-#UsingLinkedTree_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o
+UsingADTMap_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
 
-#UsingLinkedTree_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o 
+UsingLinkedTree_ADTRecTree_test_OBJS = ADTRecTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o
 
-#UsingADTMap_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o $(MODULES)/UsingDynamicArray/ADTVector.o
+UsingLinkedTree_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o 
 
-#UsingLinkedTree_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingDynamicArray/ADTVector.o
+UsingADTMap_ADTRecTree_utils_test_OBJS = ADTRecTree_utils_test.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o $(MODULES)/UsingDynamicArray/ADTVector.o
 
-#UsingADTMap_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
+UsingLinkedTree_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingLinkedTree/ADTRecTree.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingDynamicArray/ADTVector.o
+
+UsingADTMap_ADTCompTree_test_OBJS = ADTCompTree_test.o $(MODULES)/UsingADTRecTree/ADTCompTree.o $(MODULES)/ADTRecTree_utils.o $(MODULES)/UsingADTMap/ADTRecTree.o $(MODULES)/UsingDynamicArray/ADTVector.o $(MODULES)/UsingADTMap/ADTMap.o $(MODULES)/UsingADTMap/ADTSet.o
 
 
 # Ο βασικός κορμός του Makefile

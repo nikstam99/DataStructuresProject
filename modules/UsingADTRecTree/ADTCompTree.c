@@ -85,10 +85,8 @@ CompTree comptree_insert_last(CompTree tree, Pointer value) {
 
 // Αφαιρεί το τελευταίο υποδέντρο του tree
 CompTree comptree_remove_last(CompTree tree) {
-
     // Αντικαθιστά το υποδέντρο με το κενό δέντρο και επιστρέφει το tree
-    tree = (CompTree)rectree_replace_subtree((RecTree)tree, comptree_size(tree) - 1, REC_TREE_EMPTY);
-    return tree;
+    return (CompTree)rectree_replace_subtree((RecTree)tree, comptree_size(tree) - 1, REC_TREE_EMPTY);
 }
 
 // Επιστρέφει το υποδέντρο του tree στη θέση pos

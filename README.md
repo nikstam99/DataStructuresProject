@@ -31,7 +31,7 @@ __Α.Μ.__: sdi2200169
 
 Η συνάρτηση comptree_remove_last είναι Ο(logn + log2n) αφού χρησιμοποιεί μόνο την rectree_replace_subtree
 
-5. 
+5. seg
 
 ### Documentation
 
